@@ -1,4 +1,1 @@
 config.php
-
-lib/smarty/cache/*
-lib/smarty/templates_c/*
