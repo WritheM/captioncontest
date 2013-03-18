@@ -11,11 +11,7 @@ Software trademarks are included in the license
 Parts of the software are provided under separate licenses, as follows:
 
 	* jquery.js is under the MIT license 
-	* PEAR/NNTP is under the W3C license 
-	* rarinfo.php is under the modified BSD license 
 	* Smarty.class.php is under the LGPL license 
-	* Tmdb.php is under the BSD license
-	* powerspawn.php is under the BSD license
 
 
 Terms and Conditions
