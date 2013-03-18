@@ -1,5 +1,9 @@
 <?php
+require_once(WWW_DIR."/lib/quotes.php");
 
+$quote = new Quote();
+
+$page->smarty->assign('quote', $quote->loadCurrent());
 
 $page->smarty->assign('redirect', (isset($_GET['redirect'])) ? $_GET['redirect'] : '');
 $page->meta_title = "Home";

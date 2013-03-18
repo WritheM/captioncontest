@@ -3,14 +3,11 @@
 <head>
 	<meta name="keywords" content="{$page->meta_keywords}{if $page->meta_keywords != "" && $site->metakeywords != ""},{/if}{$site->metakeywords}" />
 	<meta name="description" content="{$page->meta_description}{if $page->meta_description != "" && $site->metadescription != ""} - {/if}{$site->metadescription}" />	
-	<meta name="application-name" content="wmcc-{$site->version}" />
+	<meta name="application-name" content="{$site->code}-{$site->version}" />
 	<title>{$page->meta_title}{if $page->meta_title != "" && $site->metatitle != ""} - {/if}{$site->metatitle}</title>
-{if $loggedin=="true"}	<link rel="alternate" type="application/rss+xml" title="{$site->title} Full Rss Feed" href="{$smarty.const.WWW_TOP}/rss?t=0&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}" />{/if}
 
 	<link href="{$smarty.const.WWW_TOP}/views/{$site->style}/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
 {if $site->style != "" && $site->style != "/"}	<link href="{$smarty.const.WWW_TOP}/views/{$site->style}/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-{/if}
-{if $site->google_adsense_acc != ''}	<link href="//www.google.com/cse/api/branding.css" rel="stylesheet" type="text/css" media="screen" />
 {/if}
 	<link rel="shortcut icon" type="image/ico" href="{$smarty.const.WWW_TOP}/views/{$site->style}/img/favicon.ico"/>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
