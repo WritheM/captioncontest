@@ -25,23 +25,6 @@ class DB
                 die("<div id=\"fail_connect\">\n  <error details=\"%s\" />\n</div>\n" % $e->getMessage());
             }
 
-			// initialize db connection
-			// if (defined("DB_PERSISTENT") && DB_PERSISTENT)
-			// {
-				// DB::$conn = mysql_pconnect(DB_HOST, DB_USER, DB_PASSWORD)
-				// or die("fatal error: could not connect to database! Check your config.");
-			// }
-			// else
-			// {
-				// DB::$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD)
-				// or die("fatal error: could not connect to database! Check your config.");
-			// }
-			
-			// mysql_select_db(DB_NAME, DB::$conn)
-			// or die("fatal error: could not select database! Check your config.");
-			
-			// mysql_set_charset('utf8', DB::$conn);
-			
 			DB::$initialized = true;
 		}			
 	}	
@@ -65,16 +48,16 @@ class DB
 		return ($returnlastid) ? mysql_insert_id(DB::$conn) : $result;
 	}
 	
-	public function queryOneRow($query, $useCache=false, $cacheTTL='')
+	public function queryOneRow($query, $parms, $useCache=false, $cacheTTL='')
 	{
-		$rows = $this->query($query, $useCache, $cacheTTL);
+		$rows = $this->query($query, $parms, $useCache, $cacheTTL);
 		return ($rows ? $rows[0] : false);
 	}	
 		
 	public function query($query, $parms, $useCache=false, $cacheTTL='')
 	{
 		if ($useCache)
-		{
+		{ // check if cache has this already loaded
 			$cache = new Cache;
 			if ($cache->enabled && $cache->exists($query))
 			{

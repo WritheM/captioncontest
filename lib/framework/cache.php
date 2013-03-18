@@ -3,12 +3,12 @@
 class Cache {
 	public $ttl = 600;
 	public $enabled = true;
-	public $method = 'none';
+	public $method = 'file';
 	public $mc;
 	
 	function Cache() 
 	{
-		$this->location = WWW_DIR.'../db/cache/';
+		$this->location = SMARTY_DIR.'cache'.DIRECTORY_SEPARATOR;
 
 		if (defined("CACHEOPT_TTLMEDIUM"))
 			$this->ttl =  CACHEOPT_TTLMEDIUM;
