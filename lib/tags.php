@@ -3,12 +3,12 @@ require_once(WWW_DIR."/lib/framework/db.php");
 
 class Tag
 {		
-    private $id, $qid, $tag;
+    private $id, $contest_id, $tag;
     
-    public function __construct($id, $qid, $tag) 
+    public function __construct($id, $contest_id, $tag) 
     {
         $this->id = $id;
-        $this->qid = -1;
+        $this->contest_id = -1;
         $this->tag = '';
     }
     
@@ -27,9 +27,14 @@ class TagCollection
         $this->$k = $v;
     }
     
-    public function loadByQid($qid)
+    public function get($k)
     {
-        if($id > 0)
+        return $this->$k;
+    }
+    
+    public function loadByContest($contest_id)
+    {
+        if($contest_id > 0)
         {
             // query from the db for the tags.
             

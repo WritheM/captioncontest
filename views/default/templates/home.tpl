@@ -1,3 +1,3 @@
 <PRE>
-{$quote|print_r}
+{$contest|print_r}
 </PRE>
