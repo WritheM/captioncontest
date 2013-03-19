@@ -15,10 +15,8 @@
     
 	<script type="text/javascript">
 	/* <![CDATA[ */	
-		var WWW_TOP = "{$smarty.const.WWW_TOP}";
 		var SERVERROOT = "{$serverroot}";
-		var UID = "{if $loggedin=="true"}{$userdata.ID}{else}{/if}";
-		var RSSTOKEN = "{if $loggedin=="true"}{$userdata.rsstoken}{else}{/if}";
+		var UID = {if $loggedin==='true'}{$userdata.ID}{else}-1{/if};
 	/* ]]> */		
 	</script>
 	{$page->head}
@@ -58,7 +56,7 @@
 	<div id="page">
 		
 		<div id="content">
-			{if gethostname() == 'dev'}
+			{if $page->getSubDomain() == 'dev'}
 				<div id="alert_beta" class="alert alert-note" >
 				  <button type="button" class="close" onclick="jQuery('#alert_beta').hide(200);">&times;</button>
 				  <strong>Note:</strong> You are on the beta server. Functionality and stability can not be gauranteed.

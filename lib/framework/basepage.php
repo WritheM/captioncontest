@@ -35,6 +35,8 @@ class BasePage
 		$this->site = $s->get();
 
 		$this->smarty = new Smarty();
+        
+        $this->smarty->__toString = false;
 
 		$this->smarty->template_dir = WWW_DIR.'views'.DIRECTORY_SEPARATOR.$this->theme.DIRECTORY_SEPARATOR.'templates';
 		$this->smarty->compile_dir = SMARTY_DIR.'templates_c'.DIRECTORY_SEPARATOR;

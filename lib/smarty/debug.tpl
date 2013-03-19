@@ -108,7 +108,10 @@ td {
     {foreach $assigned_vars as $vars}
        <tr class="{if $vars@iteration % 2 eq 0}odd{else}even{/if}">   
        <th>${$vars@key|escape:'html'}</th>
-       <td>{$vars|debug_print_var nofilter}</td></tr>
+       <td>
+        <pre style="height: 100px; width: 700px;overflow: auto;">{$vars|var_dump nofilter}
+        </pre>
+       </td></tr>
     {/foreach}
 </table>
 

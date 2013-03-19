@@ -47,6 +47,11 @@ class Page extends BasePage
         }
 		$this->page_template = "basepage.tpl";			
 		
-		parent::render();
+        parent::render();
 	}
+    
+    public function getSubDomain()
+    {
+        return array_shift(explode(".",$_SERVER['HTTP_HOST']));
+    }
 }
