@@ -1,13 +1,14 @@
 <?
 require_once(WWW_DIR."/lib/framework/db.php");
 require_once(WWW_DIR."/lib/image.php");
+require_once(WWW_DIR."/lib/tags.php");
 
 // a quote is classified as any period of time that a contest will run for. 
 class Quote
 {		
-	const QUOTE_STATUS_DELETED = 1;
-	const QUOTE_STATUS_PUBLISHED = 2;
-	const QUOTE_STATUS_DRAFT = 3;
+    const QUOTE_STATUS_DELETED = 1;
+    const QUOTE_STATUS_PUBLISHED = 2;
+    const QUOTE_STATUS_DRAFT = 3;
 
     private $id, $start, $end, $status, $image;
     
@@ -18,6 +19,7 @@ class Quote
         $this->end = new DateTime($end);
         $this->status = $status;
         $this->image = new Image();
+        $this->tags = new TagCollection();
         $this->captions = array(); // new Captions();
     }
     
@@ -38,6 +40,7 @@ class Quote
         }
         
         $this->image = $this->image->load($results['image_id']);
+        $this->tags = $this->tags->loadByQid($results['id']);
         
         return $this;
 

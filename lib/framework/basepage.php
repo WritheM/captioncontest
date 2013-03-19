@@ -5,7 +5,6 @@ require_once(WWW_DIR."/lib/site.php");
 
 class BasePage 
 {
-	public $debug = true;
 	public $title = '';
 	public $content = '';
 	public $head = '';
@@ -19,12 +18,12 @@ class BasePage
 	public $userdata = array();
 	public $serverurl = '';
 	public $theme = 'default';
+    public $site = '';
 	public $secure_connection = false; 
 	
 	const FLOOD_THREE_REQUESTS_WITHIN_X_SECONDS = 1.000;
 	const FLOOD_PUNISHMENT_SECONDS = 5.0;
 	
-
 	function BasePage()
 	{			
 		@session_start();
@@ -52,13 +51,35 @@ class BasePage
 		}
 		
         $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'home';
-		$this->smarty->assign('page', $this->page);
+        
+        $pageRender = array(
+            'title' => $this->title,
+            'content' => $this->content,
+            'head' => $this->head,
+            'body' => $this->body,
+            'meta_keywords' => $this->meta_keywords,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
+            'page' => $this->page,
+            'page_template' => $this->page_template,
+            //'smarty' => $this->smarty,
+            'serverurl' => $this->serverurl,
+            'theme' => $this->theme,
+            //'site' => $this->site,
+            'secure_connection' => $this->secure_connection,
+        );
+		$this->smarty->assign('page', $pageRender);
         		
         
         //should check if logged in later, if admin bypass the floodcheck.
         $this->floodCheck(false, "");
         
 		$this->smarty->assign('site', $this->site);
+    }
+    
+    public function __set($k, $v)
+    {
+        $this->$k = $v;
     }
     
     public function floodCheck($loggedin, $role)
@@ -154,8 +175,6 @@ class BasePage
 	
 	public function render() 
 	{
-        $smarty->debugging = $this->debug;
-
         $smarty->caching = true;
         $smarty->cache_lifetime = 120;
 

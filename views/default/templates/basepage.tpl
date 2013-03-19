@@ -84,12 +84,6 @@
         &copy;{$smarty.now|date_format:"%Y"} {$site->title}, All Rights Reserved. <br/>
 		{$site->footer}
 		<br />Powered by <a title="WritheM Caption Contest" href="https://github.com/WritheM/captioncontest">wmcc</a><br/>
-        
-		<br />
-		{if ($userdata.role == '2')}
-			ip:{$user->determineIP()} | 
-			server:{gethostname()}
-		{/if}
 	</p>
 	</div>
 	

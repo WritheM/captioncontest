@@ -56,18 +56,7 @@ class DB
 		
 	public function query($query, $parms, $useCache=false, $cacheTTL='')
 	{
-		if ($useCache)
-		{ // check if cache has this already loaded
-			$cache = new Cache;
-			if ($cache->enabled && $cache->exists($query))
-			{
-				$ret = $cache->fetch($query);
-				if ($ret !== false)
-					return $ret;
-			}
-		}	
-        
-        { // set up the statement / execute
+        { // set up the statement then execute or return from cache.
             $stmt = DB::$conn->prepare($query);
             $cacheQuery = $query;
             if(isset($parms))
@@ -75,7 +64,19 @@ class DB
                     $stmt->bindValue($parm[0], $parm[1]);    
                     $cacheQuery = str_replace(':'.$parm[0],$parm[1],$cacheQuery);
                 }
-
+                
+            if ($useCache)
+            { // check if cache has this already loaded
+                $cache = new Cache;
+                if ($cache->enabled && $cache->exists($cacheQuery))
+                {
+                    $ret = $cache->fetch($cacheQuery);
+                    if ($ret !== false)
+                        return $ret;
+                }
+            }	
+            
+            // either cache is off, or not loaded, proceed with a db execute.
             try 
             {
                 $stmt->execute();
@@ -97,10 +98,12 @@ class DB
             }
         }
 		
+        // the result exists, so save it in the cache for later use (if enabled)
 		if ($useCache) 
 			if ($cache->enabled)
 				$cache->store($cacheQuery, $rows, $cacheTTL);
 			
+        // return the result.
 		return $rows;
 	}	
 	

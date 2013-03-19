@@ -1,14 +1,13 @@
 <?php
 require_once("config.php");
-require('lib/smarty/Smarty.class.php');
-
-$smarty = new Smarty;
-
-//$smarty->force_compile = true;
-//$smarty->debugging = true;
-
 require_once(WWW_DIR."/lib/page.php");
-$page = new Page;
+
+$page = new Page();
+
+if (!defined('DEBUG')) {
+    define('DEBUG', false);
+}
+$page->smarty->debugging = DEBUG;
 
 switch($page->page) {
 	case 'index':
