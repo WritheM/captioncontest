@@ -8,12 +8,7 @@ class Tag
     public function __construct($id, $tag) 
     {
         $this->id = $id;
-        $this->tag = '';
-    }
-    
-    public function set($k, $v)
-    {
-        $this->$k = $v;
+        $this->tag = $tag;
     }
 }
 
@@ -27,15 +22,16 @@ class TagCollection
         {
             // query from the db for the tags.
             
+            for ($n=1;$n<3;$n++)
             { // iterate over the results
                 // populate a tag object
-                $tag = new Tag(1,'test');
+                $tag = new Tag($n,'test');
                 
                 // save it to the collection
                 $this->tags[] = $tag;
             }
             // return the collection
-            return $this;
+            return $this->tags;
         }
         else
         {
