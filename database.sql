@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: memoria
--- Generation Time: Mar 18, 2013 at 01:48 PM
+-- Generation Time: Mar 20, 2013 at 10:49 AM
 -- Server version: 5.1.63-0ubuntu0.11.10.1
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -23,6 +23,75 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `caption`
+--
+
+CREATE TABLE IF NOT EXISTS `caption` (
+  `cid` int(11) NOT NULL AUTO_INCREMENT,
+  `qid` int(11) NOT NULL,
+  `caption` text NOT NULL,
+  `user` text NOT NULL,
+  UNIQUE KEY `cid` (`cid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8993 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contests`
+--
+
+CREATE TABLE IF NOT EXISTS `contests` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `status` int(10) NOT NULL,
+  `image_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=335 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE IF NOT EXISTS `images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `width` int(4) NOT NULL,
+  `height` int(4) NOT NULL,
+  `uri` varchar(2083) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=335 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `image_tags`
+--
+
+CREATE TABLE IF NOT EXISTS `image_tags` (
+  `image_id` int(11) NOT NULL,
+  `tag` varchar(30) NOT NULL,
+  PRIMARY KEY (`image_id`,`tag`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `setting` char(10) NOT NULL,
+  `value` text NOT NULL,
+  `user` text NOT NULL,
+  UNIQUE KEY `setting` (`setting`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site`
 --
 
@@ -34,21 +103,6 @@ CREATE TABLE IF NOT EXISTS `site` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `setting` (`setting`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=102 ;
-
---
--- Dumping data for table `site`
---
-
-INSERT INTO `site` (`ID`, `setting`, `value`, `updateddate`) VALUES
-(1, 'code', 'wmcc', '2013-03-18 18:54:16'),
-(2, 'title', 'My Caption Contest', '2013-03-18 18:54:28'),
-(3, 'strapline', 'A great caption contest!', '2013-03-18 18:54:39'),
-(4, 'metatitle', 'My Caption Contest', '2013-03-18 18:54:44'),
-(5, 'metadescription', 'WMCC - a caption contest with community features', '2013-03-18 18:55:04'),
-(6, 'metakeywords', 'community,captions,contest,free', '2013-03-18 18:55:18'),
-(7, 'footer', 'Hosted by <a href="http://writhem.com/">WritheM Web Solutions</a>', '2012-12-11 01:56:43'),
-(8, 'email', 'my@email.address', '2012-12-10 10:01:17'),
-(15, 'style', 'default', '2012-12-11 01:57:33');
 
 -- --------------------------------------------------------
 
@@ -68,6 +122,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `rolechangedate` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `site`
+--
+
+INSERT INTO `site` (`ID`, `setting`, `value`, `updateddate`) VALUES
+(1, 'code', 'wmcc', '2013-03-18 18:54:16'),
+(2, 'title', 'My Caption Contest', '2013-03-18 18:54:28'),
+(3, 'strapline', 'A great caption contest!', '2013-03-18 18:54:39'),
+(4, 'metatitle', 'My Caption Contest', '2013-03-18 18:54:44'),
+(5, 'metadescription', 'WMCC - a caption contest with community features', '2013-03-18 18:55:04'),
+(6, 'metakeywords', 'community,captions,contest,free', '2013-03-18 18:55:18'),
+(7, 'footer', 'Hosted by <a href="http://writhem.com/">WritheM Web Solutions</a>', '2012-12-11 01:56:43'),
+(8, 'email', 'my@email.address', '2012-12-10 10:01:17'),
+(15, 'style', 'default', '2012-12-11 01:57:33');
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `users`

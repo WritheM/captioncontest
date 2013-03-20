@@ -18,10 +18,15 @@ class Contest
         $this->captions = array(); // new Captions();
     }
     
+    public function __get($v)
+    {
+        return $this->$v;
+    }
+    
     public function loadCurrent()
     {
 		$db = new DB();
-        $query = "SELECT NOW() AS querytime, id, start, end, status, image_id FROM `contests` WHERE `status` = ".Status::STATUS_PUBLISHED." AND NOW() > `start` ORDER BY `end` DESC LIMIT 0,1";
+        $query = "SELECT NOW() AS querytime, id, start, end, status, image_id FROM `contests` WHERE `status` = ".Status::STATUS_PUBLISHED." AND NOW() > `start` AND NOW() < `end` ORDER BY `end` DESC LIMIT 0,1";
         $parms = array();
         
         $results = $db->queryOneRow($query, $parms, true);
