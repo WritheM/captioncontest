@@ -5,9 +5,9 @@ require_once(WWW_DIR."/lib/status.php");
 
 class Caption
 {		
-    private $id, $contest, $status, $caption, $user_id;
+    public $id, $contest_id, $status, $caption, $sub_disp, $user, $score, $votes;
     
-    public function __construct($id=-1,$contest_id=-1,$status_id=-1,$caption='',$sub_disp='',$user=-1) 
+    public function __construct($id=-1,$contest_id=-1,$status_id=-1,$caption='',$sub_disp='',$user=-1,$score=-1,$votes=0) 
     {
         $this->id = $id;
         $this->contest_id = $id;
@@ -29,6 +29,9 @@ class Caption
                 'display'=>''
             );
         }
+        $this->score = $score;
+        $this->votes = $votes;
+
     }
 }
 
