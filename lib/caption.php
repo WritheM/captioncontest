@@ -32,27 +32,27 @@ class Caption
     }
 }
 
-class CaptionCollection
+class CaptionManager
 {		
-    private $captions = array();
+    private $dbo;
     
-    public function __construct($contest_id=-1)
+    public function __construct($dbo)
     {
-        return $this->load($contest_id);
+        $this->dbo = $dbo;
     }
     
-    public function load($contest_id)
+    public function load($contest_id=-1)
     {
         if($contest_id > 0)
         {
             // query from the db for the captions.
-            $db = new DB();
             $parms = array();
             $query = "SELECT NOW() AS querytime, id, contest_id, status_id, caption, sub_disp, user_id FROM `caption` WHERE `contest_id` = :contest_id";
             $parms[] = array(':contest_id',$contest_id);
             
-            $results = $db->query($query, $parms, true, 3600);
+            $results = $this->dbo->query($query, $parms, true, 3600);
             
+            $captions = array();
             foreach ($results as $row)
             { // iterate over the results
                 // populate a caption object
@@ -66,10 +66,10 @@ class CaptionCollection
                 );
                 
                 // save it to the collection
-                $this->captions[] = $caption;
+                $captions[] = $caption;
             }
             // return the collection
         }
-        return $this->captions;
+        return $captions;
     }
 }

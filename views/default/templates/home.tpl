@@ -1,5 +1,5 @@
 {if $contest.current->id !== 0}
-  Current Week!
+  Current Week:
   <PRE>
     {$contest.current|print_r}
   </PRE>
@@ -7,7 +7,7 @@
   Doesn't look like we currently have any contests running<br />
 {/if}
 {if $contest.previous->id !== 0}
-  Previous Week.
+  Previous Week:
   <PRE>
     {$contest.previous|print_r}
   </PRE>

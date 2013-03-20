@@ -15,7 +15,7 @@ class Contest
         $this->end = new DateTime();
         $this->status = new Status();
         $this->image = new Image();
-        $this->captions = new CaptionCollection(-1);
+        $this->captions = array(new Caption());
     }
 }
 
@@ -27,6 +27,7 @@ class ContestManager
     {
         $this->db = $db;
         $this->imageMan = new ImageManager($db);
+        $this->captionMan = new CaptionManager($db);
     }
     
     public function loadCurrent()
@@ -42,7 +43,7 @@ class ContestManager
         $contest->end = new DateTime($results['end']);
         $contest->status = $contest->status->load($results['status']);
         $contest->image = $this->imageMan->loadOne($results['image_id']);
-        $contest->captions = $contest->captions->load($contest->id);
+        $contest->captions = $this->captionMan->load($contest->id);
         
         return $contest;
 
@@ -61,7 +62,7 @@ class ContestManager
         $contest->end = new DateTime($results['end']);
         $contest->status = $contest->status->load($results['status']);
         $contest->image = $this->imageMan->loadOne($results['image_id']);
-        $contest->captions = $contest->captions->load($contest->id);
+        $contest->captions = $this->captionMan->load($contest->id);
         
         return $contest;
 
