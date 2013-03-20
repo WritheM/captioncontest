@@ -39,7 +39,7 @@ class ImageManager
             $image->id = (int)$results['id'];
             $image->width = (int)$results['width'];
             $image->height = (int)$results['height'];
-            $image->path = (string)$results['uri'];
+            $image->path = 'http://i.imgur.com/Sn4sEYh.jpg'; //(string)$results['uri'];
             $image->tags = $image->tags->loadBycontest($id);
                 
             return $image;

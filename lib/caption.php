@@ -31,7 +31,6 @@ class Caption
         }
         $this->score = $score;
         $this->votes = $votes;
-
     }
 }
 
@@ -72,7 +71,11 @@ class CaptionManager
                 $captions[] = $caption;
             }
             // return the collection
+            return $captions;
         }
-        return $captions;
+        else 
+        {
+            return false;
+        }
     }
 }

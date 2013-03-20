@@ -43,7 +43,6 @@ class ContestManager
         $contest->end = new DateTime($results['end']);
         $contest->status = $contest->status->load($results['status']);
         $contest->image = $this->imageMan->loadOne($results['image_id']);
-        $contest->captions = $this->captionMan->load($contest->id);
         
         return $contest;
 

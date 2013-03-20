@@ -23,23 +23,32 @@
     
 
 	{strip}
-	<div id="statusbar">
-		{if $loggedin=="true"}
-			Welcome back <a href="{$smarty.const.WWW_TOP}/profile">{$userdata.username}</a>. <a href="{$smarty.const.WWW_TOP}/logout">Logout</a>
-		{else}
-			<a href="{$smarty.const.WWW_TOP}/login">Login</a> or <a href="{$smarty.const.WWW_TOP}/register">Register</a>
-		{/if}
+	<div id="statusbar" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <a class="brand" href="{$smarty.const.WWW_TOP}{$site->home_link}">{$site->title}</a>
+      <em style="verticalAlign:text-bottom">{$site->strapline}</em>
+      <ul class="nav">
+        <li class="active">
+          <a href="#">Home</a>
+        </li>
+      </ul>
+      <ul class="nav pull-right">
+        <li>
+        {if $loggedin=="true"}
+          Welcome back <a href="{$smarty.const.WWW_TOP}/profile">{$userdata.username}</a>. <a href="{$smarty.const.WWW_TOP}/logout">Logout</a>
+        {else}
+          <a href="{$smarty.const.WWW_TOP}/login">Login</a>
+        </li>
+        <li>
+          <a href="{$smarty.const.WWW_TOP}/register">Register</a>
+        {/if}
+        </li>
+      </ul>
+          
+    </div>
 	</div>
 	{/strip}
 
-	<div id="logo">
-		<a class="logolink" title="{$site->title} Logo" href="{$smarty.const.WWW_TOP}{$site->home_link}"><img class="logoimg" alt="{$site->title} Logo" src="{$smarty.const.WWW_TOP}/views/{$site->style}/img/logo.png" /></a>
-
-		{if $site->menuposition==2}<ul>{$main_menu}</ul>{/if}
-
-		<h1><a href="{$smarty.const.WWW_TOP}{$site->home_link}">{$site->title}</a></h1>
-		<p><em>{$site->strapline}</em></p>
-	</div>
   
 	<hr />
 	
