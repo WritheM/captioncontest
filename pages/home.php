@@ -1,11 +1,12 @@
 <?php
+require_once(WWW_DIR."/lib/framework/db.php");
 require_once(WWW_DIR."/lib/contest.php");
 
-$current = new Contest();
-$previous = new Contest();
+$db = new DB();
+$cm = new ContestManager($db);
 $contest = array(
-    'current' => $current->loadCurrent(),
-    'previous' => $previous->loadPrevious()
+    'current' => $cm->loadCurrent(),
+    'previous' => $cm->loadPrevious()
 );
 
 $page->smarty->assign('contest', $contest);
