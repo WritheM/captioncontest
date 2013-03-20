@@ -21,11 +21,18 @@ class Image
     {
         if($id > 0)
         {
-            $this->id = $id;
-            $this->path = 'quotes/test.jpg';
-            $this->width = 120;
-            $this->height = 120;
-            $this->tags = $this->tags->loadBycontest(1);
+            $db = new DB();
+            $parms = array();
+            $query = "SELECT NOW() AS querytime, id, width, height, uri FROM `images` WHERE `id` = :id LIMIT 0,1";
+            $parms[] = array(':id',$id);
+            
+            $results = $db->queryOneRow($query, $parms, true, 3600);
+            
+            $this->id = (int)$results['id'];
+            $this->width = (int)$results['width'];
+            $this->height = (int)$results['height'];
+            $this->path = (string)$results['uri'];
+            $this->tags = $this->tags->loadBycontest($id);
                 
             return $this;
         }

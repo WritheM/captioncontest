@@ -29,7 +29,7 @@ class Contest
         $query = "SELECT NOW() AS querytime, id, start, end, status, image_id FROM `contests` WHERE `status` = ".Status::STATUS_PUBLISHED." AND NOW() > `start` AND NOW() < `end` ORDER BY `end` DESC LIMIT 0,1";
         $parms = array();
         
-        $results = $db->queryOneRow($query, $parms, true);
+        $results = $db->queryOneRow($query, $parms, true, 3600);
         
         $this->id = (int)$results['id'];
         $this->start = new DateTime($results['start']);
@@ -47,7 +47,7 @@ class Contest
         $query = "SELECT NOW() AS querytime, id, start, end, status, image_id FROM `contests` WHERE `status` = ".Status::STATUS_PUBLISHED." AND NOW() > `start` ORDER BY `end` DESC LIMIT 1,2";
         $parms = array();
         
-        $results = $db->queryOneRow($query, $parms, true);
+        $results = $db->queryOneRow($query, $parms, true, 3600);
         
         $this->id = (int)$results['id'];
         $this->start = new DateTime($results['start']);
