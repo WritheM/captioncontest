@@ -26,6 +26,7 @@ class ContestManager
     public function __construct($db)
     {
         $this->db = $db;
+        $this->imageMan = new ImageManager($db);
     }
     
     public function loadCurrent()
@@ -40,7 +41,7 @@ class ContestManager
         $contest->start = new DateTime($results['start']);
         $contest->end = new DateTime($results['end']);
         $contest->status = $contest->status->load($results['status']);
-        $contest->image = $contest->image->load($results['image_id']);
+        $contest->image = $this->imageMan->loadOne($results['image_id']);
         $contest->captions = $contest->captions->load($contest->id);
         
         return $contest;
@@ -59,7 +60,7 @@ class ContestManager
         $contest->start = new DateTime($results['start']);
         $contest->end = new DateTime($results['end']);
         $contest->status = $contest->status->load($results['status']);
-        $contest->image = $contest->image->load($results['image_id']);
+        $contest->image = $this->imageMan->loadOne($results['image_id']);
         $contest->captions = $contest->captions->load($contest->id);
         
         return $contest;
